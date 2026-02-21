@@ -1,5 +1,5 @@
-const asTokens = require('./as_tokens');
-const policyFee = require('./policy_fee');
+import asTokens from './as_tokens.js';
+import policyFee from './policy_fee.js';
 
 const defaultCltvBuffer = 40;
 const {isArray} = Array;
@@ -59,14 +59,14 @@ const minFee = 0;
     [total_mtokens]: <Sharded Payments Total Millitokens String>
   }
 */
-module.exports = args => {
+export default args => {
   const finalCltvDelta = args.cltv_delta || defaultCltvBuffer;
 
   if (args.height === undefined) {
     throw new Error('ExpectedChainHeightForRoute');
   }
 
-  if (!isArray(args.hops) || !args.hops.length) {
+  if (!isArray(args.hops) || args.hops.length === 0) {
     throw new Error('ExpectedHopsToConstructRouteFrom');
   }
 
@@ -79,7 +79,7 @@ module.exports = args => {
   }
 
   // Check hops for validity
-  args.hops.forEach((hop, i) => {
+  for (const hop of args.hops) {
     if (hop.base_fee_mtokens === undefined) {
       throw new Error('ExpectedHopBaseFeeMillitokensForRouteConstruction');
     }
@@ -99,19 +99,16 @@ module.exports = args => {
     if (!hop.public_key) {
       throw new Error('ExpectedHopNextPublicKeyForRouteConstruction');
     }
-
-    return;
-  });
+  }
 
   let forwardMtokens = BigInt(args.mtokens);
-  const [firstHop] = args.hops.slice();
   let timeoutHeight = args.height + finalCltvDelta;
 
   // To construct the route, we need to go backwards from the end
   const backwardsPath = args.hops.slice().reverse().map((hop, i, hops) => {
     let feeMtokens = BigInt(minFee);
 
-    if (!!i) {
+    if (i) {
       const forward = policyFee({
         inbound: hops[i],
         policy: hops[i-1],

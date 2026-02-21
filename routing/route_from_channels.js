@@ -1,5 +1,5 @@
-const hopsFromChannels = require('./hops_from_channels');
-const routeFromHops = require('./route_from_hops');
+import hopsFromChannels from './hops_from_channels.js';
+import routeFromHops from './route_from_hops.js';
 
 const defaultInitialCltvDelta = 144;
 const {isArray} = Array;
@@ -67,8 +67,8 @@ const {isArray} = Array;
     }
   }
 */
-module.exports = args => {
-  if (!isArray(args.channels) || !args.channels.length) {
+export default args => {
+  if (!isArray(args.channels) || args.channels.length === 0) {
     throw new Error('ExpectedChannelsToFormRouteToDestination');
   }
 

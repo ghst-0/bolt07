@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {decodeChanId} = require('./../../');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import { decodeChanId } from './../../index.js';
 
 const tests = [
   {
@@ -52,9 +50,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => decodeChanId(args), new Error(error), 'Got expected err');
 
       return end();
@@ -62,10 +60,10 @@ tests.forEach(({args, description, error, expected}) => {
 
     const decoded = decodeChanId(args);
 
-    strictSame(decoded.block_height, expected.block_height, 'Block height');
-    strictSame(decoded.block_index, expected.block_index, 'Block index');
-    strictSame(decoded.output_index, expected.output_index, 'Output index');
+    deepStrictEqual(decoded.block_height, expected.block_height, 'Block height');
+    deepStrictEqual(decoded.block_index, expected.block_index, 'Block index');
+    deepStrictEqual(decoded.output_index, expected.output_index, 'Output index');
 
     return end();
   });
-});
+}

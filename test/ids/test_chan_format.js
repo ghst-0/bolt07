@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {chanFormat} = require('./../../');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import { chanFormat } from './../../index.js';
 
 const tests = [
   {
@@ -37,9 +35,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => chanFormat(args), new Error(error), 'Got expected error');
 
       return end();
@@ -47,8 +45,8 @@ tests.forEach(({args, description, error, expected}) => {
 
     const {channel} = chanFormat(args);
 
-    strictSame(channel, expected.channel, 'Channel formatted returned');
+    deepStrictEqual(channel, expected.channel, 'Channel formatted returned');
 
     return end();
   });
-});
+}

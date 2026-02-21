@@ -1,11 +1,11 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import graph_beta from './../fixtures/graph_beta.json' with { type: 'json' };
+import graph_charlie from './../fixtures/graph_charlie.json' with { type: 'json' };
+import { hopsFromChannels } from './../../index.js';
 
-const betaChannels = require('./../fixtures/graph_beta').channels;
-const charlieChannels = require('./../fixtures/graph_charlie').channels;
-const {hopsFromChannels} = require('./../../');
-
+const betaChannels = graph_beta.channels
+const charlieChannels = graph_charlie.channels;
 const tests = [
   {
     args: {
@@ -410,16 +410,16 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => hopsFromChannels(args), new Error(error), 'Got error');
     } else {
       const {hops} = hopsFromChannels(args);
 
-      strictSame(hops, expected, 'Hops returned as expected');
+      deepStrictEqual(hops, expected, 'Hops returned as expected');
     }
 
     return end();
   });
-});
+}

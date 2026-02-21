@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {rawChanId} = require('./../../');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import { rawChanId } from './../../index.js';
 
 const tests = [
   {
@@ -37,9 +35,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => rawChanId(args), new Error(error), 'Got expected error');
 
       return end();
@@ -47,8 +45,8 @@ tests.forEach(({args, description, error, expected}) => {
 
     const {id} = rawChanId(args);
 
-    strictSame(id, expected.id, 'Raw channel id returned');
+    deepStrictEqual(id, expected.id, 'Raw channel id returned');
 
     return end();
   });
-});
+}

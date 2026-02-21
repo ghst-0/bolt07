@@ -7,8 +7,9 @@
     "url": "https://github.com/alexbosworth/bolt07/issues"
   },
   "dependencies": {
-    "bn.js": "5.2.1"
+    "bn.js": "5.2.3"
   },
+  "type": "module",
   "description": "Utilities for working with bolt07 data formats",
   "keywords": [
     "bolt",
@@ -26,7 +27,7 @@
     "url": "https://github.com/alexbosworth/bolt07.git"
   },
   "scripts": {
-    "test": "npx nyc@15.1 node --experimental-test-coverage --test"
+    "test": "node --experimental-test-coverage --test"
   },
   "version": "1.9.4"
 }

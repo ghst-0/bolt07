@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const encodeBase32 = require('./../../addresses/encode_base32');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import encodeBase32 from './../../addresses/encode_base32.js';
 
 const tests = [
   {
@@ -26,16 +24,16 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => encodeBase32(args), new Error(error), 'Got expected error');
     } else {
       const res = encodeBase32(args);
 
-      strictSame(res, expected, 'Got expected result');
+      deepStrictEqual(res, expected, 'Got expected result');
     }
 
     return end();
-  });
-});
+  })
+}

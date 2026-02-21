@@ -1,8 +1,8 @@
-const BN = require('bn.js');
+import BN from 'bn.js';
+import constants from './constants.json' with { type: 'json' };
+import rawChanId from './raw_chan_id.js';
 
-const {decBase} = require('./constants');
-const rawChanId = require('./raw_chan_id');
-
+const {decBase} = constants;
 /** Channel id in numeric format
 
   {
@@ -18,7 +18,7 @@ const rawChanId = require('./raw_chan_id');
     number: <Channel Id Number String>
   }
 */
-module.exports = ({channel, id}) => {
+export default ({channel, id}) => {
   if (!channel && !id) {
     throw new Error('ExpectedChannelIdOrComponentsToConvertToNumber');
   }

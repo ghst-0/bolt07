@@ -1,5 +1,5 @@
-const hopsFromChannels = require('./hops_from_channels');
-const routeFromChannels = require('./route_from_channels');
-const routeFromHops = require('./route_from_hops');
+import hopsFromChannels from './hops_from_channels.js';
+import routeFromChannels from './route_from_channels.js';
+import routeFromHops from './route_from_hops.js';
 
-module.exports = {hopsFromChannels, routeFromChannels, routeFromHops};
+export { hopsFromChannels, routeFromChannels, routeFromHops };

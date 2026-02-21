@@ -1,13 +1,16 @@
-const {blockIndexByteLen} = require('./constants');
-const {blockIndexOffset} = require('./constants');
-const {chanDelimiter} = require('./constants');
-const componentsFromBuffer = require('./components_from_buffer');
-const {decBase} = require('./constants');
-const {heightByteLen} = require('./constants');
-const {heightByteOffset} = require('./constants');
-const {outputIndexByteLen} = require('./constants');
-const rawChanId = require('./raw_chan_id');
+import constants from './constants.json' with { type: 'json' };
+import componentsFromBuffer from './components_from_buffer.js';
+import rawChanId from './raw_chan_id.js';
 
+const {
+  decBase,
+  chanDelimiter,
+  blockIndexByteLen,
+  blockIndexOffset,
+  heightByteLen,
+  heightByteOffset,
+  outputIndexByteLen
+} = constants;
 const heightBytesUsed = heightByteLen - heightByteOffset;
 const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
 
@@ -31,9 +34,9 @@ const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
     output_index: <Channel Funding Transaction Output Index Number>
   }
 */
-module.exports = ({channel, id, number}) => {
+export default ({channel, id, number}) => {
   // Exit early when there is no need to decode components from a buffer
-  if (!!channel) {
+  if (channel) {
     const [height, blockIndex, outputindex] = channel.split(chanDelimiter);
 
     return {
@@ -49,11 +52,11 @@ module.exports = ({channel, id, number}) => {
 
   const idLen = heightBytesUsed + indexBytesUsed + outputIndexByteLen;
 
-  if (!!id && Buffer.from(id, 'hex').length !== idLen) {
+  if (id && Buffer.from(id, 'hex').length !== idLen) {
     throw new Error('UnexpectedLengthOfShortChannelId');
   }
 
-  const channelId = !id ? rawChanId({number}).id : id;
+  const channelId = id ? id : rawChanId({ number }).id;
 
   const chan = componentsFromBuffer({id: Buffer.from(channelId, 'hex')});
 

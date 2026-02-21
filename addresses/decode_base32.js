@@ -16,7 +16,7 @@ const word = 5;
     data: <Hex Encoded Value String>
   }
 */
-module.exports = ({base32}) => {
+export default ({base32}) => {
   const b32 = base32.toLowerCase();
   let bits = 0;
   let index = 0;

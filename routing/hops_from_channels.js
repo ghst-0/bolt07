@@ -42,8 +42,8 @@ const payNodesCount = 2;
     }]
   }
 */
-module.exports = ({channels, destination}) => {
-  if (!isArray(channels) || !channels.length) {
+export default ({channels, destination}) => {
+  if (!isArray(channels) || channels.length === 0) {
     throw new Error('ExpectedChannelsToDeriveHops');
   }
 
@@ -105,7 +105,7 @@ module.exports = ({channels, destination}) => {
       cltvDelta = endPolicies.find(n => n.public_key === payingKey).cltv_delta;
     }
 
-    if (!!nextCltvPolicy) {
+    if (nextCltvPolicy) {
       cltvDelta = nextCltvPolicy.cltv_delta;
     }
 
@@ -125,7 +125,7 @@ module.exports = ({channels, destination}) => {
 
   const [firstChannel, secondChannel] = channels;
 
-  const initialChannels = !secondChannel ? firstChannel : secondChannel;
+  const initialChannels = secondChannel ? secondChannel : firstChannel;
 
   const initialPolicies = initialChannels.policies;
 

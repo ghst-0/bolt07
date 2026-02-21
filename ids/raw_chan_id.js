@@ -1,11 +1,13 @@
-const BN = require('bn.js');
+import BN from 'bn.js';
+import constants from './constants.json' with { type: 'json' };
+import encodeChanId from './encode_chan_id.js';
 
-const {chanDelimiter} = require('./constants');
-const {decBase} = require('./constants');
-const {endian} = require('./constants');
-const encodeChanId = require('./encode_chan_id');
-const {rawChanIdByteLen} = require('./constants');
-
+const {
+  chanDelimiter,
+  decBase,
+  endian,
+  rawChanIdByteLen
+} = constants;
 /** Raw channel id
 
   {
@@ -21,7 +23,7 @@ const {rawChanIdByteLen} = require('./constants');
     id: <Raw Channel Id Hex String>
   }
 */
-module.exports = ({channel, number}) => {
+export default ({channel, number}) => {
   if (!channel && !number) {
     throw new Error('ExpectedChannelIdInNumericFormat');
   }

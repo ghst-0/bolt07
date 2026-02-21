@@ -1,5 +1,5 @@
-const decodeChanId = require('./decode_chan_id');
-const encodeChanId = require('./encode_chan_id');
+import decodeChanId from './decode_chan_id.js';
+import encodeChanId from './encode_chan_id.js';
 
 /** Get channel components formatted string
 
@@ -16,7 +16,7 @@ const encodeChanId = require('./encode_chan_id');
     channel: <Components Channel Format String>
   }
 */
-module.exports = ({id, number}) => {
+export default ({id, number}) => {
   if (!id && !number) {
     throw new Error('ExpectedIdOrNumberToFormatAsChannelComponents');
   }

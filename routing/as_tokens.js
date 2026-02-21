@@ -11,7 +11,7 @@ const mtokensPerToken = BigInt(1e3);
     tokens: <Tokens Number>
   }
 */
-module.exports = ({mtokens}) => {
+export default ({mtokens}) => {
   const tokens = Number(mtokens / mtokensPerToken);
 
   return {tokens};

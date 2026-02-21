@@ -1,14 +1,12 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {decodeSocket} = require('./../../');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import { decodeSocket } from './../../index.js';
 
 const tests = [
   {
     args: {},
     description: 'A socket is expected',
-    error: 'ExectedSocketDataToDecodeSocket',
+    error: 'ExpectedSocketDataToDecodeSocket',
   },
   {
     args: {ip4: true, ip6: true},
@@ -54,16 +52,16 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => decodeSocket(args), new Error(error), 'Got expected error');
     } else {
       const res = decodeSocket(args);
 
-      strictSame(res, expected, 'Got expected result');
+      deepStrictEqual(res, expected, 'Got expected result');
     }
 
     return end();
   });
-});
+}

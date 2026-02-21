@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {routeFromHops} = require('./../../');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import { routeFromHops } from './../../index.js';
 
 const tests = [
   {
@@ -341,9 +339,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => routeFromHops(args), new Error(error), 'Got expected err');
     } else {
       const route = routeFromHops(args);
@@ -351,9 +349,9 @@ tests.forEach(({args, description, error, expected}) => {
       delete route.payment;
       delete route.total_mtokens;
 
-      strictSame(route, expected, 'Route is constructed as expected');
+      deepStrictEqual(route, expected, 'Route is constructed as expected');
     }
 
     return end();
-  });
-});
+  })
+}

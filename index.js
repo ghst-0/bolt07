@@ -1,15 +1,20 @@
-const {chanFormat} = require('./ids');
-const {chanNumber} = require('./ids');
-const {decodeChanId} = require('./ids');
-const {decodeSocket} = require('./addresses');
-const {encodeChanId} = require('./ids');
-const {encodeSocket} = require('./addresses');
-const {hopsFromChannels} = require('./routing');
-const {rawChanId} = require('./ids');
-const {routeFromChannels} = require('./routing');
-const {routeFromHops} = require('./routing');
+import {
+  chanFormat,
+  chanNumber,
+  decodeChanId,
+  encodeChanId,
+  rawChanId
+} from './ids/index.js';
+import {
+  decodeSocket,
+  encodeSocket
+} from './addresses/index.js';
+import {
+  hopsFromChannels,
+  routeFromChannels,
+  routeFromHops} from './routing/index.js';
 
-module.exports = {
+export {
   chanFormat,
   chanNumber,
   decodeChanId,

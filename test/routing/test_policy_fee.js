@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const policyFee = require('./../../routing/policy_fee');
+import test from 'node:test';
+import { deepStrictEqual, throws } from 'node:assert/strict';
+import policyFee from './../../routing/policy_fee.js';
 
 const tests = [
   {
@@ -54,14 +52,14 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => policyFee(args), new Error(error), 'Got expected error');
     } else {
-      strictSame(policyFee(args).fee_mtokens, expected.fee_mtokens, 'Fee');
+      deepStrictEqual(policyFee(args).fee_mtokens, expected.fee_mtokens, 'Fee');
     }
 
     return end();
   });
-});
+}

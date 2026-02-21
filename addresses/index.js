@@ -1,4 +1,4 @@
-const decodeSocket = require('./decode_socket');
-const encodeSocket = require('./encode_socket');
+import decodeSocket from './decode_socket.js';
+import encodeSocket from './encode_socket.js';
 
-module.exports = {decodeSocket, encodeSocket};
+export { decodeSocket, encodeSocket };

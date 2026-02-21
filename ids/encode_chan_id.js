@@ -1,15 +1,17 @@
-const BN = require('bn.js');
+import constants from './constants.json' with { type: 'json' };
+import BN from 'bn.js';
 
-const {blockIndexByteLen} = require('./constants');
-const {blockIndexOffset} = require('./constants');
-const {chanDelimiter} = require('./constants');
-const {decBase} = require('./constants');
-const {heightByteIndex} = require('./constants');
-const {heightByteLen} = require('./constants');
-const {heightByteOffset} = require('./constants');
-const {outputIndexByteLen} = require('./constants');
-const {rawChanIdByteLen} = require('./constants');
-
+const {
+  decBase,
+  chanDelimiter,
+  blockIndexByteLen,
+  blockIndexOffset,
+  heightByteIndex,
+  heightByteLen,
+  heightByteOffset,
+  outputIndexByteLen,
+  rawChanIdByteLen
+} = constants;
 /** Encode a short channel id from components
 
   {
@@ -30,7 +32,7 @@ const {rawChanIdByteLen} = require('./constants');
     number: <Channel Number String>
   }
 */
-module.exports = args => {
+export default args => {
   if (args.block_height === undefined) {
     throw new Error('ExpectedBlockHeightForChannelId');
   }

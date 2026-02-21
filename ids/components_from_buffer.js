@@ -1,10 +1,13 @@
-const {blockIndexByteLen} = require('./constants');
-const {blockIndexOffset} = require('./constants');
-const {heightByteLen} = require('./constants');
-const {heightByteOffset} = require('./constants');
-const {outputByteOffset} = require('./constants');
-const {outputIndexByteLen} = require('./constants');
+import constants from './constants.json' with { type: 'json' };
 
+const {
+  blockIndexByteLen,
+  blockIndexOffset,
+  heightByteLen,
+  heightByteOffset,
+  outputByteOffset,
+  outputIndexByteLen
+} = constants;
 const heightBytesUsed = heightByteLen - heightByteOffset;
 const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
 
@@ -25,7 +28,7 @@ const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
     output_index: <Channel Funding Transaction Output Index Number>
   }
 */
-module.exports = ({id}) => {
+export default ({id}) => {
   if (!Buffer.isBuffer(id)) {
     throw new Error('ExpectedChannelIdBuffer');
   }

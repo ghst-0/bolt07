@@ -1,4 +1,4 @@
-const encodeBase32 = require('./encode_base32');
+import encodeBase32 from './encode_base32.js';
 
 const hexAsIpV4 = hex => [...Buffer.from(hex.slice(0, 8), 'hex')].join('.');
 const hexAsIpV6 = data => data.slice(0, 32).match(/.{1,4}/g).join(':');
@@ -22,16 +22,16 @@ const tor3HexLength = 74;
     [socket]: <Connection Socket String>
   }
 */
-module.exports = ({ip4, ip6, tor3}) => {
+export default ({ip4, ip6, tor3}) => {
   const data = ip4 || ip6 || tor3;
 
   if (!data) {
-    throw new Error('ExectedSocketDataToDecodeSocket');
+    throw new Error('ExpectedSocketDataToDecodeSocket');
   }
 
   const [, other] = [ip4, ip6, tor3].filter(n => !!n);
 
-  if (!!other) {
+  if (other) {
     throw new Error('ExpectedOnlyOneSocketTypeToDecode');
   }
 
@@ -54,11 +54,10 @@ module.exports = ({ip4, ip6, tor3}) => {
     throw new Error('UnexpectedLengthForTorV3SocketData');
   }
 
-  if (!!ip4) {
+  if (ip4) {
     return {socket: `${hexAsIpV4(ip4)}:${port}`};
-  } else if (!!ip6) {
+  } else if (ip6) {
     return {socket: `${hexAsIpV6(ip6)}:${port}`};
-  } else {
-    return {socket: `${hexAsTorV3(data)}.onion:${port}`};
   }
+  return {socket: `${hexAsTorV3(data)}.onion:${port}`};
 };
