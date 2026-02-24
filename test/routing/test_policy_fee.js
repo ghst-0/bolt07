@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import policyFee from './../../routing/policy_fee.js';
+
+import { policyFee } from '../../routing/policy_fee.js';
 
 const tests = [
   {

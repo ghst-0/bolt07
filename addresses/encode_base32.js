@@ -15,7 +15,7 @@ const word = 5;
     base32: <Base32 Encoded String>
   }
 */
-export default ({data}) => {
+const encodeBase32 = ({data}) => {
   let bits = 0;
   const encoded = hexAsBuffer(data);
   let base32 = '';
@@ -38,3 +38,5 @@ export default ({data}) => {
 
   return {base32};
 };
+
+export { encodeBase32 }

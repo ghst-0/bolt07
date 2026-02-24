@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import { chanFormat } from './../../index.js';
+
+import { chanFormat } from '../../ids/chan_format.js';
 
 const tests = [
   {

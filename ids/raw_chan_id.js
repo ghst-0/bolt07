@@ -1,6 +1,7 @@
 import BN from 'bn.js';
+
 import constants from './constants.json' with { type: 'json' };
-import encodeChanId from './encode_chan_id.js';
+import { encodeChanId } from './encode_chan_id.js';
 
 const {
   chanDelimiter,
@@ -23,12 +24,12 @@ const {
     id: <Raw Channel Id Hex String>
   }
 */
-export default ({channel, number}) => {
+const rawChanId = ({channel, number}) => {
   if (!channel && !number) {
     throw new Error('ExpectedChannelIdInNumericFormat');
   }
 
-  if (!!number) {
+  if (number) {
     const rawId = new BN(number, decBase);
 
     return {
@@ -47,3 +48,4 @@ export default ({channel, number}) => {
   }
 };
 
+export { rawChanId }

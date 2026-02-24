@@ -1,8 +1,9 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import graph_beta from './../fixtures/graph_beta.json' with { type: 'json' };
-import graph_charlie from './../fixtures/graph_charlie.json' with { type: 'json' };
-import { hopsFromChannels } from './../../index.js';
+
+import graph_beta from '../fixtures/graph_beta.json' with { type: 'json' };
+import graph_charlie from '../fixtures/graph_charlie.json' with { type: 'json' };
+import { hopsFromChannels } from '../../routing/hops_from_channels.js';
 
 const betaChannels = graph_beta.channels
 const charlieChannels = graph_charlie.channels;

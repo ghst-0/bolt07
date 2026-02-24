@@ -1,6 +1,7 @@
 import constants from './constants.json' with { type: 'json' };
-import componentsFromBuffer from './components_from_buffer.js';
-import rawChanId from './raw_chan_id.js';
+
+import { componentsFromBuffer } from './components_from_buffer.js';
+import { rawChanId } from './raw_chan_id.js';
 
 const {
   decBase,
@@ -34,7 +35,7 @@ const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
     output_index: <Channel Funding Transaction Output Index Number>
   }
 */
-export default ({channel, id, number}) => {
+const decodeChanId = ({channel, id, number}) => {
   // Exit early when there is no need to decode components from a buffer
   if (channel) {
     const [height, blockIndex, outputindex] = channel.split(chanDelimiter);
@@ -66,3 +67,5 @@ export default ({channel, id, number}) => {
     output_index: chan.output_index,
   };
 };
+
+export { decodeChanId }

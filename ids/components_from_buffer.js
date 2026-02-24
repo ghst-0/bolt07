@@ -28,7 +28,7 @@ const indexBytesUsed = blockIndexByteLen - blockIndexOffset;
     output_index: <Channel Funding Transaction Output Index Number>
   }
 */
-export default ({id}) => {
+const componentsFromBuffer = ({id}) => {
   if (!Buffer.isBuffer(id)) {
     throw new Error('ExpectedChannelIdBuffer');
   }
@@ -57,3 +57,4 @@ export default ({id}) => {
   };
 };
 
+export { componentsFromBuffer }

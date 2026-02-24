@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import { routeFromHops } from './../../index.js';
+
+import { routeFromHops } from '../../routing/route_from_hops.js';
 
 const tests = [
   {

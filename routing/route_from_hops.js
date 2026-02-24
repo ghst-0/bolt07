@@ -1,5 +1,5 @@
-import asTokens from './as_tokens.js';
-import policyFee from './policy_fee.js';
+import { asTokens } from './as_tokens.js';
+import { policyFee } from './policy_fee.js';
 
 const defaultCltvBuffer = 40;
 const {isArray} = Array;
@@ -59,7 +59,7 @@ const minFee = 0;
     [total_mtokens]: <Sharded Payments Total Millitokens String>
   }
 */
-export default args => {
+const routeFromHops = args => {
   const finalCltvDelta = args.cltv_delta || defaultCltvBuffer;
 
   if (args.height === undefined) {
@@ -157,3 +157,5 @@ export default args => {
     total_mtokens: args.total_mtokens,
   };
 };
+
+export { routeFromHops }

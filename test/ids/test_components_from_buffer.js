@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { throws } from 'node:assert/strict';
-import componentsFromBuffer from './../../ids/components_from_buffer.js';
+
+import { componentsFromBuffer } from '../../ids/components_from_buffer.js';
 
 const tests = [
   {

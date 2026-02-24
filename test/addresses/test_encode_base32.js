@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import encodeBase32 from './../../addresses/encode_base32.js';
+
+import { encodeBase32 } from '../../addresses/encode_base32.js';
 
 const tests = [
   {

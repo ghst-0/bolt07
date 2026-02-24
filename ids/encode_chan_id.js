@@ -1,5 +1,6 @@
-import constants from './constants.json' with { type: 'json' };
 import BN from 'bn.js';
+
+import constants from './constants.json' with { type: 'json' };
 
 const {
   decBase,
@@ -32,7 +33,7 @@ const {
     number: <Channel Number String>
   }
 */
-export default args => {
+const encodeChanId = args => {
   if (args.block_height === undefined) {
     throw new Error('ExpectedBlockHeightForChannelId');
   }
@@ -76,3 +77,5 @@ export default args => {
     number: new BN(id).toString(decBase),
   };
 };
+
+export { encodeChanId }

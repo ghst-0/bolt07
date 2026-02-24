@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import { routeFromChannels } from './../../index.js';
+
+import { routeFromChannels } from '../../routing/route_from_channels.js';
 
 const makeChannel = args => {
   return {

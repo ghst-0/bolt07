@@ -1,5 +1,5 @@
-import hopsFromChannels from './hops_from_channels.js';
-import routeFromHops from './route_from_hops.js';
+import { hopsFromChannels } from './hops_from_channels.js';
+import { routeFromHops } from './route_from_hops.js';
 
 const defaultInitialCltvDelta = 144;
 const {isArray} = Array;
@@ -67,7 +67,7 @@ const {isArray} = Array;
     }
   }
 */
-export default args => {
+const routeFromChannels = args => {
   if (!isArray(args.channels) || args.channels.length === 0) {
     throw new Error('ExpectedChannelsToFormRouteToDestination');
   }
@@ -102,3 +102,5 @@ export default args => {
 
   return {route};
 };
+
+export { routeFromChannels }

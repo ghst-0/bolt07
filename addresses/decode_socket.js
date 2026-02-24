@@ -1,4 +1,4 @@
-import encodeBase32 from './encode_base32.js';
+import { encodeBase32 } from './encode_base32.js';
 
 const hexAsIpV4 = hex => [...Buffer.from(hex.slice(0, 8), 'hex')].join('.');
 const hexAsIpV6 = data => data.slice(0, 32).match(/.{1,4}/g).join(':');
@@ -22,7 +22,7 @@ const tor3HexLength = 74;
     [socket]: <Connection Socket String>
   }
 */
-export default ({ip4, ip6, tor3}) => {
+const decodeSocket = ({ip4, ip6, tor3}) => {
   const data = ip4 || ip6 || tor3;
 
   if (!data) {
@@ -61,3 +61,5 @@ export default ({ip4, ip6, tor3}) => {
   }
   return {socket: `${hexAsTorV3(data)}.onion:${port}`};
 };
+
+export { decodeSocket }

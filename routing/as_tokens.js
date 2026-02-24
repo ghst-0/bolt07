@@ -11,8 +11,11 @@ const mtokensPerToken = BigInt(1e3);
     tokens: <Tokens Number>
   }
 */
-export default ({mtokens}) => {
+const asTokens = ({mtokens}) => {
   const tokens = Number(mtokens / mtokensPerToken);
 
   return {tokens};
 };
+
+export { asTokens }
+

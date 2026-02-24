@@ -1,4 +1,4 @@
-import decodeBase32 from './decode_base32.js';
+import { decodeBase32 } from './decode_base32.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const ipv4Match = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$/;
@@ -20,7 +20,7 @@ const torV3Match = /[a-z2-7]{56}.onion/i;
     [tor3]: <Tor V3 Socket Hex Encoded String>
   }
 */
-export default args => {
+const encodeSocket = args => {
   if (!args) {
     throw new Error('ExpectedArgumentsToEncodeSocket');
   }
@@ -58,3 +58,5 @@ export default args => {
 
   return {};
 };
+
+export { encodeSocket }

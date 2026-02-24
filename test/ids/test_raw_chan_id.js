@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import { rawChanId } from './../../index.js';
+
+import { rawChanId } from '../../ids/raw_chan_id.js';
 
 const tests = [
   {

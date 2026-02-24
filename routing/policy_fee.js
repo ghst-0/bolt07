@@ -23,7 +23,7 @@ const rateDivisor = BigInt(1e6);
     fee_mtokens: <Fee Millitokens String>
   }
 */
-export default ({inbound, mtokens, policy}) => {
+const policyFee = ({inbound, mtokens, policy}) => {
   if (mtokens === undefined) {
     throw new Error('ExpectedMillitokensForPolicyFeeCalculation');
   }
@@ -59,3 +59,5 @@ export default ({inbound, mtokens, policy}) => {
 
   return {fee_mtokens: (fee - discount).toString()};
 };
+
+export { policyFee }

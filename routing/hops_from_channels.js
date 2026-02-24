@@ -42,7 +42,7 @@ const payNodesCount = 2;
     }]
   }
 */
-export default ({channels, destination}) => {
+const hopsFromChannels = ({channels, destination}) => {
   if (!isArray(channels) || channels.length === 0) {
     throw new Error('ExpectedChannelsToDeriveHops');
   }
@@ -136,3 +136,5 @@ export default ({channels, destination}) => {
     initial_cltv: (initial || {cltv_delta: defaultCltvDelta}).cltv_delta,
   };
 };
+
+export { hopsFromChannels }

@@ -1,5 +1,5 @@
-import decodeChanId from './decode_chan_id.js';
-import encodeChanId from './encode_chan_id.js';
+import { decodeChanId } from './decode_chan_id.js';
+import { encodeChanId } from './encode_chan_id.js';
 
 /** Get channel components formatted string
 
@@ -16,7 +16,7 @@ import encodeChanId from './encode_chan_id.js';
     channel: <Components Channel Format String>
   }
 */
-export default ({id, number}) => {
+const chanFormat = ({id, number}) => {
   if (!id && !number) {
     throw new Error('ExpectedIdOrNumberToFormatAsChannelComponents');
   }
@@ -32,3 +32,4 @@ export default ({id, number}) => {
   return {channel};
 };
 
+export { chanFormat }

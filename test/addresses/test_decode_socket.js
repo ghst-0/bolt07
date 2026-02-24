@@ -1,6 +1,7 @@
 import test from 'node:test';
 import { deepStrictEqual, throws } from 'node:assert/strict';
-import { decodeSocket } from './../../index.js';
+
+import { decodeSocket } from '../../addresses/decode_socket.js';
 
 const tests = [
   {
